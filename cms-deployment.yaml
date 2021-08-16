@@ -1,0 +1,39 @@
+  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cms
+  labels:
+    run: cms
+spec:
+  selector:
+    matchLabels:
+      run: cms
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: cms
+    spec:
+      containers:
+      - name: cms
+        image: robydocker/cms:1.0
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1 
+kind: Service
+metadata:
+  name: cms-service
+  labels:
+    run: cms
+spec:
+  selector:
+    run: cms
+  type: NodePort
+  ports:
+  - nodePort: 30002
+    port: 92
+    targetPort: 80
