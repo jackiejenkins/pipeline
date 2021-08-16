@@ -31,7 +31,7 @@ metadata:
 spec:
   selector:
     run: aml
-  type: LoadBalancer
+  type: NodePort
   ports:
   - nodePort: 30000
     port: 90
