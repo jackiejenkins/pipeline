@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aml
+  labels:
+    run: aml
+spec:
+  selector:
+    matchLabels:
+      run: aml
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: aml
+    spec:
+      containers:
+      - name: aml
+        image: robydocker/aml:1.0
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1 
+kind: Service
+metadata:
+  name: aml-service
+  labels:
+    run: aml
+spec:
+  selector:
+    run: aml
+  type: LoadBalancer
+  ports:
+  - nodePort: 30000
+    port: 90
+    targetPort: 80
+    
+  
