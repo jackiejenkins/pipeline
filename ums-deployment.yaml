@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: uml
+  name: ums
   labels:
-    run: uml
+    run: ums
 spec:
   selector:
     matchLabels:
-      run: uml
+      run: ums
   replicas: 1
   template:
     metadata:
       labels:
-        run: uml
+        run: ums
     spec:
       containers:
-      - name: uml
-        image: robydocker/uml:1.0
+      - name: ums
+        image: robydocker/ums:1.0
         ports:
         - containerPort: 80
 
@@ -26,12 +26,12 @@ spec:
 apiVersion: v1 
 kind: Service
 metadata:
-  name: uml-service
+  name: ums-service
   labels:
-    run: uml
+    run: ums
 spec:
   selector:
-    run: uml
+    run: ums
   type: NodePort
   ports:
   - nodePort: 30001
